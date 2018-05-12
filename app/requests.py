@@ -1,6 +1,7 @@
 from app import app#importing the app module
 import urllib.request, json #this will help in the creation to our API URL and send it to json modules. 
 from .models import news
+from .config import config
 
 News = news.News
 api_key = app.config['NEWS_API_KEY']
@@ -23,5 +24,17 @@ def get_news(category): #a function that takes news category as an argument
 
     return news_results
 
+def process_results(news_list):
+    
+    news_results = []
+    for news_item in news_list:
+        source = news_item.get('source')
+        author = news_item.get('author')
+        title = news_item.get('title')
+        description = news_item.get('description')
+        url = news_item.get('url')
+        urlToImage = news_item.get('urlToImage')
+        publisedAt = news_item.get('publisedAt')
 
+    return news_results
 
